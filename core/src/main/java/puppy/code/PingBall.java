@@ -52,11 +52,12 @@ public class PingBall {
 	            ySpeed = -ySpeed;
 	        }
 	    }
-	    
+
 	    public void checkCollision(Paddle paddle) {
-	        if(collidesWith(paddle)){
+	        if(collidesWith(paddle) && ySpeed < 0){
+				ySpeed = -ySpeed;
+				y = paddle.getY() + paddle.getHeight() + size;
 	            color = Color.GREEN;
-	            ySpeed = -ySpeed;
 	        }
 	        else{
 	            color = Color.WHITE;
@@ -71,7 +72,11 @@ public class PingBall {
 	    
 	    public void checkCollision(Block block) {
 	        if(collidesWith(block)){
-	            ySpeed = - ySpeed;
+				if (x >= block.x && x <= block.x + block.width) {
+					ySpeed = -ySpeed;
+				} else {
+					xSpeed = -xSpeed;
+				}
 	            block.destroyed = true;
 	        }
 	    }
