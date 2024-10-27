@@ -15,9 +15,23 @@ public abstract class ObjectGame
     protected int y;
     protected int width;
     protected int height;
+    protected int radio;
 
     /**
-     * Constructor de la clase.
+     * Constructor de la clase, se inicializa para un objeto circular.
+     * @param x Numero entero que representa la posicion en el eje X del objeto
+     * @param y Numero entero que representa la posicion en el eje Y del objeto.
+     * @param radio Numero entero que representa el radio del objeto circular.
+     */
+    public ObjectGame(int x, int y, int radio)
+    {
+        this.x = x;
+        this.y = y;
+        this.radio = radio;
+    }
+
+    /**
+     * Constructor de la clase, se inicializa un objeto no circular.
      * @param x Numero entero que representa la posicion en el eje X del objeto
      * @param y Numero entero que representa la posicion en el eje Y del objeto.
      * @param width Numero entero que representa el ancho del objeto.
@@ -49,6 +63,7 @@ public abstract class ObjectGame
     {
         this.y = y;
     }
+
     /**
      * Establece el ancho del objeto.
      * @param width Un numero entero, representa el nuevo ancho del objeto.
@@ -57,6 +72,7 @@ public abstract class ObjectGame
     {
         this.width = width;
     }
+
     /**
      * Establece la altura del objeto.
      * @param height Un numero entero, representa el nuevo alto del objeto.
@@ -64,6 +80,15 @@ public abstract class ObjectGame
     public void setHeight(int height)
     {
         this.height = height;
+    }
+
+    /**
+     * Establece el radio del objeto.
+     * @param radio Un numero entero, representa el nuevo radio del objeto.
+     */
+    public void setRadio(int radio)
+    {
+        this.radio = radio;
     }
 
     // Getters
@@ -102,6 +127,15 @@ public abstract class ObjectGame
     public int getHeight()
     {
         return height;
+    }
+
+    /**
+     * Obtiene el radio del objeto.
+     * @return Un numero entero, representa el radio del objeto.
+     */
+    public int getRadio()
+    {
+        return radio;
     }
 
     // Metodos
