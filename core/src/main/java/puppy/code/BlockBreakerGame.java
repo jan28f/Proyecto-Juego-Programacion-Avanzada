@@ -36,7 +36,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    crearBloques(2+nivel);
 			
 		    shape = new ShapeRenderer();
-		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 3, 4, true);
+		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 3, 4 , true);
 		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 		    vidas = 3;
 		    puntaje = 0;    
@@ -92,12 +92,12 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (blocks.size()==0) {
 	        	nivel++;
 	        	crearBloques(2+nivel);
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 3, 4, true);
 	        }    	
 	        //dibujar bloques
 	        for (Block b : blocks) {        	
 	            b.draw(shape);
-	            ball.checkCollision(b);
+	            b.colisionaCon(ball);
 	        }
 	        // actualizar estado de los bloques 
 	        for (int i = 0; i < blocks.size(); i++) {
@@ -109,7 +109,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	            }
 	        }
 	        
-	        ball.checkCollision(pad);
+	        pad.colisionaCon(ball);
 	        ball.draw(shape);
 	        
 	        shape.end();
