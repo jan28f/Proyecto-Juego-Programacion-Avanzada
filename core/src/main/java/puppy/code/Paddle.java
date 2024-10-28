@@ -2,13 +2,14 @@ package puppy.code;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  * Clase Paddle extendida de ObjectGame, representa la paleta del juego.
  */
-public class Paddle extends ObjectGame
+public class Paddle extends ObjectGame implements Colisionable
 {
     /**
      * Constructor de la clase.
@@ -39,5 +40,34 @@ public class Paddle extends ObjectGame
             x = x2;
         }
         shape.rect(x, y, width, height);
+    }
+
+    /**
+     * Se verifica si existe colision de la pelota y paleta, para cambiar la direccion de la pelota.
+     * @param pelota Pelota a verificar si colisiona con el elemento.
+     */
+    public void colisionaCon(PingBall pelota)
+    {
+        if(verificarColision(pelota) && pelota.getYSpeed() < 0)
+        {
+            pelota.setYSpeed(-pelota.getYSpeed());
+            pelota.setY(y + height + pelota.getRadio());
+        }
+        else
+        {
+            pelota.setColor(Color.WHITE);
+        }
+    }
+
+    /**
+     * Se verifica si existe la colision entre la paleta y la pelota.
+     * @param pelota Pelota a verificar si colisiona con la paleta.
+     * @return true si existe colision entre los elementos, false en caso contrario.
+     */
+    public boolean verificarColision(PingBall pelota)
+    {
+        boolean intersectaX = (x + width >= pelota.getX() - pelota.getRadio()) && (x <= pelota.getX() + pelota.getRadio());
+        boolean intersectaY = (y + height >= pelota.getY() - pelota.getRadio()) && (y <= pelota.getY() + pelota.getRadio());
+        return intersectaX && intersectaY;
     }
 }

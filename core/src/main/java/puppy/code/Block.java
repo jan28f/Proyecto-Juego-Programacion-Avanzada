@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 /**
  * Clase Block extendida de ObjectGame, representa un bloque del juego.
  */
-public class Block extends ObjectGame
+public class Block extends ObjectGame implements Colisionable
 {
     Color cc;
     boolean destroyed;
@@ -35,5 +35,52 @@ public class Block extends ObjectGame
     {
     	shape.setColor(cc);
         shape.rect(x, y, width, height);
+    }
+
+    /**
+     * Se verifica y elimina el bloque en caso de existir colision con una pelota.
+     * @param pelota Pelota a verificar si colisiona con el bloque.
+     */
+    public void colisionaCon(PingBall pelota)
+    {
+        if (verificarColision(pelota))
+        {
+            // Se calcula la distancia del rectangulo al centro de la pelota en ambos ejes.
+            double proximidadX = Math.max(x, Math.min(pelota.getX(), x + width));
+            double proximidadY = Math.max(y, Math.min(pelota.getY(), y + height));
+            proximidadX = Math.abs(pelota.getX() - proximidadX);
+            proximidadY = Math.abs(pelota.getY() - proximidadY);
+
+            // Si pega en la esquina del bloque.
+            if (proximidadX == proximidadY)
+            {
+                pelota.setXSpeed(-pelota.getXSpeed());
+                pelota.setYSpeed(-pelota.getYSpeed());
+            }
+            // Si pega por los lados del bloque.
+            else if (proximidadX > proximidadY)
+            {
+                pelota.setXSpeed(-pelota.getXSpeed());
+            }
+            // Si pega por arriba o debajo del bloque.
+            else
+            {
+                pelota.setYSpeed(-pelota.getYSpeed());
+            }
+
+            destroyed = true;
+        }
+    }
+
+    /**
+     * Implementacion del metodo heredado de la interfaz, se verifica existe colision entre el bloque y la pelota.
+     * @param pelota Pelota a verificar si colisiona con el bloque.
+     * @return true si existe colision entre los elementos, false en caso contrario.
+     */
+    public boolean verificarColision(PingBall pelota)
+    {
+        boolean intersectaX = (x + width >= pelota.getX() - pelota.getRadio()) && (x <= pelota.getX() + pelota.getRadio());
+        boolean intersectaY = (y + height >= pelota.getY() - pelota.getRadio()) && (y <= pelota.getY() + pelota.getRadio());
+        return intersectaX && intersectaY;
     }
 }
