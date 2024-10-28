@@ -43,20 +43,50 @@ public class Paddle extends ObjectGame implements Colisionable
     }
 
     /**
-     * Se verifica si existe colision de la pelota y paleta, para cambiar la direccion de la pelota.
+     * Se verifica si existe colision entre la pelota y la paleta, para cambiar la direccion de la pelota.
      * @param pelota Pelota a verificar si colisiona con el elemento.
      */
     public void colisionaCon(PingBall pelota)
     {
         if(verificarColision(pelota) && pelota.getYSpeed() < 0)
         {
+            // Cambio de direccion de la pelota.
+            pelota.setXSpeed(calcularVelocidadX(x, pelota.getX(), width));
             pelota.setYSpeed(-pelota.getYSpeed());
+            // Posicionamiento de la pelota sobre la paleta.
             pelota.setY(y + height + pelota.getRadio());
+
+            pelota.setColor(Color.GREEN);
         }
         else
         {
             pelota.setColor(Color.WHITE);
         }
+    }
+
+    /**
+     * Metodo privado, calcula la nueva velocidad de la pelota respecto al eje x segun donde esta golpee la paleta.
+     * @param paletaPosX Un numero entero, representa la posicion de la paleta respecto al eje X.
+     * @param pelotaPosX Un numero entero, representa la posicion de la pelota respecto al eje X.
+     * @param paletaAncho Un numero entero, representa el ancho de la paleta.
+     * @return Un numero entero, representa la nueva velocidad de la pelota respecto al eje X.
+     */
+    private int calcularVelocidadX(int paletaPosX, int pelotaPosX, int paletaAncho)
+    {
+        float centroPaleta = paletaPosX + paletaAncho / 2.0f;
+        float distancia = (pelotaPosX - centroPaleta) / (paletaAncho / 2.0f);
+
+        float nuevaVelocidadX = distancia * 5;
+        if (nuevaVelocidadX > 3)
+        {
+            nuevaVelocidadX = 3;
+        }
+        else if (nuevaVelocidadX < -3)
+        {
+            nuevaVelocidadX = -3;
+        }
+
+        return (int)nuevaVelocidadX;
     }
 
     /**
