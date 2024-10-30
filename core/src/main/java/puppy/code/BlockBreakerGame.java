@@ -90,7 +90,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 				infoPartida.disminuirVidas();
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 3, 3, true);
 				Sonidos caidas = new Sonidos();
-						caidas.cargarSonido("C:\\Users\\Jose Mena\\Documents\\workspace\\Proyecto-Juego-Programacion-Avanzada-main\\lwjgl3\\src\\musica\\080047_lose_funny_retro_video-game-80925.wav");
+				caidas.cargarSonido("/musica/caidaDePelota.wav");
 	        		if (infoPartida.getVidas() > 0)
 	        			caidas.reproducirSonido();
 	        }
@@ -103,7 +103,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	crearBloques(2 + infoPartida.getNivel());
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 				Sonidos perdidas = new Sonidos();
-	        		perdidas.cargarSonido("C:\\Users\\Jose Mena\\Documents\\workspace\\Proyecto-Juego-Programacion-Avanzada-main\\lwjgl3\\src\\musica\\game-over-39-199830.wav");
+	        		perdidas.cargarSonido("/musica/gameOver.wav");
 	        		perdidas.reproducirSonido();
 
 	        }
@@ -112,7 +112,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (blocks.size() == 0)
 			{
 				Sonidos nextLevel = new Sonidos();
-	        		nextLevel.cargarSonido("C:\\Users\\Jose Mena\\Documents\\workspace\\Proyecto-Juego-Programacion-Avanzada-main\\lwjgl3\\src\\musica\\item-39146.wav");
+	        		nextLevel.cargarSonido("/musica/nivelTerminado.wav");
 	        		nextLevel.reproducirSonido();
 				infoPartida.siguienteNivel();
 				infoPartida.incrementarVidas();
