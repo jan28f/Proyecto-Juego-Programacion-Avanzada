@@ -90,8 +90,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 				infoPartida.disminuirVidas();
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 3, 3, true);
 				Sonidos caidas = new Sonidos();
-	        		caidas.cargarSonido("C:\\Users\\Jose Mena\\Documents\\workspace\\Proyecto-Juego-Programacion-Avanzada-main\\lwjgl3\\src\\musica\\080047_lose_funny_retro_video-game-80925.wav");
-	        		if (vidas > 0)
+						caidas.cargarSonido("C:\\Users\\Jose Mena\\Documents\\workspace\\Proyecto-Juego-Programacion-Avanzada-main\\lwjgl3\\src\\musica\\080047_lose_funny_retro_video-game-80925.wav");
+	        		if (infoPartida.getVidas() > 0)
 	        			caidas.reproducirSonido();
 	        }
 
