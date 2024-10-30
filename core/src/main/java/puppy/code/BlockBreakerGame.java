@@ -102,18 +102,14 @@ public class BlockBreakerGame extends ApplicationAdapter {
 				infoPartida.reiniciar();
 	        	crearBloques(2 + infoPartida.getNivel());
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
-				Sonidos perdidas = new Sonidos();
-	        		perdidas.cargarSonido("/musica/gameOver.wav");
-	        		perdidas.reproducirSonido();
+				
 
 	        }
 
 	        // verificar si el nivel se terminó
 	        if (blocks.size() == 0)
 			{
-				Sonidos nextLevel = new Sonidos();
-	        		nextLevel.cargarSonido("/musica/nivelTerminado.wav");
-	        		nextLevel.reproducirSonido();
+				
 				infoPartida.siguienteNivel();
 				infoPartida.incrementarVidas();
 	        	crearBloques(2 + infoPartida.getNivel());
