@@ -121,7 +121,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 					infoPartida.aumentarPuntaje();
 					if (infoPartida.getPuntaje() > infoPartida.getMejorPuntaje())
 					{
-						infoPartida.setPuntaje(infoPartida.getMejorPuntaje());
+						infoPartida.setMejorPuntaje(infoPartida.getPuntaje());
 					}
 	                blocks.remove(b);
 	                i--; //para no saltarse 1 tras eliminar del arraylist
