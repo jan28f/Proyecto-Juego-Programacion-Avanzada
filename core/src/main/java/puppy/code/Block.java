@@ -69,6 +69,9 @@ public class Block extends ObjectGame implements Colisionable
             }
 
             destroyed = true;
+            Sonidos colisiones = new Sonidos();
+            colisiones.cargarSonido("/musica/colisionConBloque.wav");
+            colisiones.reproducirSonido();
             
         }
     }
