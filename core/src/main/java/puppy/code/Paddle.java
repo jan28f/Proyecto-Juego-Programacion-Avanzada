@@ -31,10 +31,20 @@ public class Paddle extends ObjectGame implements Colisionable
         shape.setColor(Color.BLUE);
         int x2 = x; //= Gdx.input.getX();
 
+        // Moviemiento de la paleta a velocidad normal.
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A))
             x2 =x-8;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D))
             x2=x+8;
+
+        // Movimiento de la paleta con velocidad reducida.
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            x2 =x-3;
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            x2=x+3;
+
         // y = Gdx.graphics.getHeight() - Gdx.input.getY();
         if (x2 > 0 && x2+width < Gdx.graphics.getWidth()) {
             x = x2;
