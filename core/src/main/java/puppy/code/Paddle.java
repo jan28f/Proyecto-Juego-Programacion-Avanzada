@@ -29,27 +29,36 @@ public class Paddle extends ObjectGame implements Colisionable
 	public void draw(ShapeRenderer shape)
     {
         shape.setColor(Color.BLUE);
-        int x2 = x; //= Gdx.input.getX();
+        shape.rect(getX(), getY(), getWidth(), getHeight());
+    }
 
-        // Moviemiento de la paleta a velocidad normal.
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A))
-            x2 =x-8;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D))
-            x2=x+8;
-
-        // Movimiento de la paleta con velocidad reducida.
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-            x2 =x-3;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-            x2=x+3;
-
-        // y = Gdx.graphics.getHeight() - Gdx.input.getY();
-        if (x2 > 0 && x2+width < Gdx.graphics.getWidth()) {
-            x = x2;
+    public void moverIzquierda()
+    {
+        int posNueva = getX() - 8;
+        if (posNueva > 0 && posNueva + getWidth() < Gdx.graphics.getWidth()) {
+            setX(posNueva);
         }
-        shape.rect(x, y, width, height);
+    }
+    public void moverDerecha()
+    {
+        int posNueva = getX() + 8;
+        if (posNueva > 0 && posNueva + getWidth() < Gdx.graphics.getWidth()) {
+            setX(posNueva);
+        }
+    }
+    public void moverLigeroIzquierda()
+    {
+        int posNueva = getX() - 3;
+        if (posNueva > 0 && posNueva + getWidth() < Gdx.graphics.getWidth()) {
+            setX(posNueva);
+        }
+    }
+    public void moverLigeroDerecha()
+    {
+        int posNueva = getX() + 3;
+        if (posNueva > 0 && posNueva + getWidth() < Gdx.graphics.getWidth()) {
+            setX(posNueva);
+        }
     }
 
     /**
@@ -61,10 +70,10 @@ public class Paddle extends ObjectGame implements Colisionable
         if(verificarColision(pelota) && pelota.getYSpeed() < 0)
         {
             // Cambio de direccion de la pelota.
-            pelota.setXSpeed(calcularVelocidadX(x, pelota.getX(), width));
+            pelota.setXSpeed(calcularVelocidadX(getX(), pelota.getX(), getWidth()));
             pelota.setYSpeed(-pelota.getYSpeed());
             // Posicionamiento de la pelota sobre la paleta.
-            pelota.setY(y + height + pelota.getRadio());
+            pelota.setY(getY() + getHeight() + pelota.getRadio());
 
             pelota.setColor(Color.GREEN);
         }
@@ -106,8 +115,8 @@ public class Paddle extends ObjectGame implements Colisionable
      */
     public boolean verificarColision(PingBall pelota)
     {
-        boolean intersectaX = (x + width >= pelota.getX() - pelota.getRadio()) && (x <= pelota.getX() + pelota.getRadio());
-        boolean intersectaY = (y + height >= pelota.getY() - pelota.getRadio()) && (y <= pelota.getY() + pelota.getRadio());
+        boolean intersectaX = (getX() + getWidth() >= pelota.getX() - pelota.getRadio()) && (getX() <= pelota.getX() + pelota.getRadio());
+        boolean intersectaY = (getY() + getHeight() >= pelota.getY() - pelota.getRadio()) && (getY() <= pelota.getY() + pelota.getRadio());
         return intersectaX && intersectaY;
     }
 }

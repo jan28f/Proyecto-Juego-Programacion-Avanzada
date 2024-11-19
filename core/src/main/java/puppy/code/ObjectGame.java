@@ -11,11 +11,11 @@ public abstract class ObjectGame
      * Atributos de la clase.
      *
      */
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
-    protected int radio;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private int radio;
 
     /**
      * Constructor de la clase, se inicializa para un objeto circular.

@@ -34,7 +34,7 @@ public class Block extends ObjectGame implements Colisionable
     public void draw(ShapeRenderer shape)
     {
     	shape.setColor(cc);
-        shape.rect(x, y, width, height);
+        shape.rect(getX(), getY(), getWidth(), getHeight());
     }
 
     /**
@@ -46,8 +46,8 @@ public class Block extends ObjectGame implements Colisionable
         if (verificarColision(pelota))
         {
             // Se calcula la distancia del rectangulo al centro de la pelota en ambos ejes.
-            double proximidadX = Math.max(x, Math.min(pelota.getX(), x + width));
-            double proximidadY = Math.max(y, Math.min(pelota.getY(), y + height));
+            double proximidadX = Math.max(getX(), Math.min(pelota.getX(), getX() + getWidth()));
+            double proximidadY = Math.max(getY(), Math.min(pelota.getY(), getY() + getHeight()));
             proximidadX = Math.abs(pelota.getX() - proximidadX);
             proximidadY = Math.abs(pelota.getY() - proximidadY);
 
@@ -83,8 +83,8 @@ public class Block extends ObjectGame implements Colisionable
      */
     public boolean verificarColision(PingBall pelota)
     {
-        boolean intersectaX = (x + width >= pelota.getX() - pelota.getRadio()) && (x <= pelota.getX() + pelota.getRadio());
-        boolean intersectaY = (y + height >= pelota.getY() - pelota.getRadio()) && (y <= pelota.getY() + pelota.getRadio());
+        boolean intersectaX = (getX() + getWidth() >= pelota.getX() - pelota.getRadio()) && (getX() <= pelota.getX() + pelota.getRadio());
+        boolean intersectaY = (getY() + getHeight() >= pelota.getY() - pelota.getRadio()) && (getY() <= pelota.getY() + pelota.getRadio());
         return intersectaX && intersectaY;
     }
 }

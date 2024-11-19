@@ -109,8 +109,8 @@ public class PingBall extends ObjectGame
 	 */
 	public void setXY(int x, int y)
 	{
-		this.x = x;
-		this.y = y;
+		setX(x);
+		setY(y);
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class PingBall extends ObjectGame
 	public void draw(ShapeRenderer shape)
 	{
 		shape.setColor(color);
-		shape.circle(x, y, radio);
+		shape.circle(getX(), getY(), getRadio());
 	}
 
 	/**
@@ -129,13 +129,13 @@ public class PingBall extends ObjectGame
 	public void update()
 	{
 		if (estaQuieto) return;
-		x += xSpeed;
-		y += ySpeed;
-		if (x-radio < 0 || x+radio > Gdx.graphics.getWidth())
+		setX(getX() + xSpeed);
+		setY(getY() + ySpeed);
+		if (getX() - getRadio() < 0 || getX() + getRadio() > Gdx.graphics.getWidth())
 		{
 			xSpeed = -xSpeed;
 		}
-		if (y+radio > Gdx.graphics.getHeight())
+		if (getY() + getRadio() > Gdx.graphics.getHeight())
 		{
 			ySpeed = -ySpeed;
 		}
