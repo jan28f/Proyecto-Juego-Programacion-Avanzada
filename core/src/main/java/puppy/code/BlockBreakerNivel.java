@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockBreakerNivel extends Nivel {
     private OrthographicCamera camera;
@@ -35,6 +36,11 @@ public class BlockBreakerNivel extends Nivel {
         pad = new Paddle(Gdx.graphics.getWidth() / 2 - 50, 40, 100, 10);
         infoPartida = InfoGame.getIntancia();
         crearBloques(2 + infoPartida.getNivel());
+        ContextCamBlock cambio = new ContextCamBlock(new AumentoDurabilidad());
+        cambio.ejecutarCambioEstado(blocks);
+        cambio.cambiar(new BajarBloques());
+        cambio.ejecutarCambioEstado(blocks);
+
     }
 
     @Override
@@ -60,6 +66,18 @@ public class BlockBreakerNivel extends Nivel {
             crearBloques(2 + infoPartida.getNivel());
             ball = new PingBall(pad.getX() + pad.getWidth() / 2 - 5, pad.getY() + pad.getHeight() + 11, 10, 3, 3, true);
             return true;
+        }
+        for (int i = 0; i < blocks.size(); i++)
+        {
+            if (pad.verificarColisionBloques(blocks.get(i)))
+            {
+                infoPartida.reiniciar();
+                crearBloques(2 + infoPartida.getNivel());
+                Sonidos perdidas = new Sonidos();
+                perdidas.cargarSonido("/musica/nivelTerminado.wav");
+                perdidas.reproducirSonido();
+                return true;
+            }
         }
         return false;
     }
@@ -173,6 +191,7 @@ public class BlockBreakerNivel extends Nivel {
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10)
             {
                 blocks.add(new Block(x, y, blockWidth, blockHeight));
+
             }
         }
     }
