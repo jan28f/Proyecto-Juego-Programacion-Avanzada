@@ -11,6 +11,7 @@ public class Block extends ObjectGame implements Colisionable
 {
     Color cc;
     boolean destroyed;
+    int durabilidad;
 
     /**
      * Constructor de la clase.
@@ -25,6 +26,17 @@ public class Block extends ObjectGame implements Colisionable
         destroyed = false;
         Random r = new Random(x+y);
         cc = new Color(0.1f+r.nextFloat(1), r.nextFloat(1), r.nextFloat(1), 10);
+        durabilidad = 1;
+    }
+
+    public int getDurabilidad()
+    {
+        return durabilidad;
+    }
+
+    public void setDurabilidad(int durabilidad)
+    {
+        this.durabilidad = durabilidad;
     }
 
     /**
@@ -56,19 +68,23 @@ public class Block extends ObjectGame implements Colisionable
             {
                 pelota.setXSpeed(-pelota.getXSpeed());
                 pelota.setYSpeed(-pelota.getYSpeed());
+                durabilidad--;
             }
             // Si pega por los lados del bloque.
             else if (proximidadX > proximidadY)
             {
                 pelota.setXSpeed(-pelota.getXSpeed());
+                durabilidad--;
             }
             // Si pega por arriba o debajo del bloque.
             else
             {
                 pelota.setYSpeed(-pelota.getYSpeed());
+                durabilidad--;
             }
-
-            destroyed = true;
+            if (durabilidad == 0) {
+                destroyed = true;
+            }
             Sonidos colisiones = new Sonidos();
             colisiones.cargarSonido("/musica/colisionConBloque.wav");
             colisiones.reproducirSonido();
