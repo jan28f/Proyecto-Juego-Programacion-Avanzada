@@ -65,10 +65,8 @@ public class Paddle extends ObjectGame implements Colisionable
      * Se verifica si existe colision entre la pelota y la paleta, para cambiar la direccion de la pelota.
      * @param pelota Pelota a verificar si colisiona con el elemento.
      */
-    public void colisionaCon(PingBall pelota)
-    {
-        if(verificarColision(pelota) && pelota.getYSpeed() < 0)
-        {
+    public void colisionaCon(PingBall pelota) {
+        if (verificarColision(pelota) && pelota.getYSpeed() < 0) {
             // Cambio de direccion de la pelota.
             pelota.setXSpeed(calcularVelocidadX(getX(), pelota.getX(), getWidth()));
             pelota.setYSpeed(-pelota.getYSpeed());
@@ -76,9 +74,7 @@ public class Paddle extends ObjectGame implements Colisionable
             pelota.setY(getY() + getHeight() + pelota.getRadio());
 
             pelota.setColor(Color.GREEN);
-        }
-        else
-        {
+        } else {
             pelota.setColor(Color.WHITE);
         }
     }
@@ -117,6 +113,13 @@ public class Paddle extends ObjectGame implements Colisionable
     {
         boolean intersectaX = (getX() + getWidth() >= pelota.getX() - pelota.getRadio()) && (getX() <= pelota.getX() + pelota.getRadio());
         boolean intersectaY = (getY() + getHeight() >= pelota.getY() - pelota.getRadio()) && (getY() <= pelota.getY() + pelota.getRadio());
+        return intersectaX && intersectaY;
+    }
+
+    public boolean verificarColisionBloques(Block bloque)
+    {
+        boolean intersectaX = (getX() + getWidth() >= bloque.getX()) && (getX() <= bloque.getX() + bloque.getWidth());
+        boolean intersectaY = (getY() + getHeight() >= bloque.getY()) && (getY() <= bloque.getY() + bloque.getHeight());
         return intersectaX && intersectaY;
     }
 }
