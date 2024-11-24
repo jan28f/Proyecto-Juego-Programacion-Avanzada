@@ -190,12 +190,13 @@ public class BlockBreakerNivel extends Nivel {
         int blockWidth = 70;
         int blockHeight = 26;
         int y = Gdx.graphics.getHeight();
+        FabricaBloques fabricaBloques = new FabricaBloquesAleatorios();
         for (int cont = 0; cont < filas; cont++)
         {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10)
             {
-                blocks.add(new Block(x, y, blockWidth, blockHeight));
+                blocks.add(fabricaBloques.crearBloque(x, y, blockWidth, blockHeight));
 
             }
         }
