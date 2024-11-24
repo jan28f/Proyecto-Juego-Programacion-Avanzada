@@ -20,6 +20,7 @@ public class BlockBreakerNivel extends Nivel {
     private Paddle pad;
     private ArrayList<Block> blocks = new ArrayList<Block>();
     private InfoGame infoPartida;
+    private BajarBloques bajarBloques = new BajarBloques();
 
     @Override
     protected void inicializarNivel()
@@ -38,8 +39,9 @@ public class BlockBreakerNivel extends Nivel {
         crearBloques(2 + infoPartida.getNivel());
         ContextCamBlock cambio = new ContextCamBlock(new AumentoDurabilidad());
         cambio.ejecutarCambioEstado(blocks);
-        cambio.cambiar(new BajarBloques());
+        cambio.cambiar(bajarBloques);
         cambio.ejecutarCambioEstado(blocks);
+
 
     }
 
@@ -54,6 +56,7 @@ public class BlockBreakerNivel extends Nivel {
             Sonidos perdidas = new Sonidos();
             perdidas.cargarSonido("/musica/gameOver.wav");
             perdidas.reproducirSonido();
+            bajarBloques.reiniciar(blocks);
             return true;
         }
         if (blocks.size() == 0)
@@ -65,6 +68,7 @@ public class BlockBreakerNivel extends Nivel {
             infoPartida.incrementarVidas();
             crearBloques(2 + infoPartida.getNivel());
             ball = new PingBall(pad.getX() + pad.getWidth() / 2 - 5, pad.getY() + pad.getHeight() + 11, 10, 3, 3, true);
+            bajarBloques.reiniciar(blocks);
             return true;
         }
         for (int i = 0; i < blocks.size(); i++)
@@ -76,6 +80,7 @@ public class BlockBreakerNivel extends Nivel {
                 Sonidos perdidas = new Sonidos();
                 perdidas.cargarSonido("/musica/nivelTerminado.wav");
                 perdidas.reproducirSonido();
+                bajarBloques.reiniciar(blocks);
                 return true;
             }
         }
